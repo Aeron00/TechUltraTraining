@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="teacher_result_tree" model="ir.ui.view">
+            <field name="name">teacher.result.tree</field>
+            <field name="model">teacher.result</field>
+            <field name="arch" type="xml">
+                <tree string="Students">
+                    <field name="class_name"/>
+                    <field name="name"/>
+                    <field name="teacher"/>
+                    <button type="object" name="stud_copy" string="student copy" class="btn-success"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="teacher_result_form" model="ir.ui.view">
+            <field name="name">teacher.result.form</field>
+            <field name="model">teacher.result</field>
+            <field name="arch" type="xml">
+                <form string="Teacher">
+                    <sheet>
+                        <h1>
+                            <group col="4" colspan="2">
+                                <field name="class_name" required="1" placeholder="Select Standard"/>
+                                <field name="name" placeholder="Select Name" widget="many2one_tags"/>
+                            </group>
+                        </h1>
+                        <notebook>
+                            <page name="name" string="Insert Data">
+                                <group row="5">
+                                    <field name="maths"/>
+                                    <field name="science"/>
+                                    <field name="english"/>
+                                    <field name="history"/>
+                                    <button type="object" name="count_perc" string="Count Percentage" class="btn-info"/>
+                                    <field name="percentage"/>
+                                </group>
+                                <group col="2">
+                                    <field name="teacher" widget="many2many_tags"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="add_results">
+            <field name="name">Results</field>
+            <field name="res_model">teacher.result</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="teacher_result_menu" name="Results" parent="school_teacher_menu"
+                  action="add_results"/>
+    </data>
+</odoo>

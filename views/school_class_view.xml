@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="view_class_tree" model="ir.ui.view">
+            <field name="name">class.data.tree</field>
+            <field name="model">class.data</field>
+            <field name="arch" type="xml">
+                <tree string="Class">
+                    <field name="std"/>
+                    <field name="tot_stu"/>
+                    <field name="pre_stu"/>
+                    <field name="date"/>
+                    <field name="teacher_id" widget="many2many_tags"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_class_form" model="ir.ui.view">
+            <field name="name">class.data.form</field>
+            <field name="model">class.data</field>
+            <field name="priority" eval="14"/>
+            <field name="arch" type="xml">
+                <form string="Class">
+                    <sheet>
+                        <h1>
+                            <field name="std" required="1" placeholder="Enter Class"/>
+                        </h1>
+                        <notebook colspan="4">
+                            <page name="std" string="Insert Data">
+                                <group row="8" rowspan="2"
+                                       name="school">
+                                    <field name="tot_stu"/>
+                                    <field name="pre_stu"/>
+                                    <field name="date"/>
+                                    <field name="teacher_id" widget="many2many_tags"/>
+                                </group>
+                            </page>
+                            <page name="timetable" string="Time Table">
+                                <group colspan="4" col="4" name="table">
+                                    <field name="entry_time"/>
+                                    <field name="exit_time"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="school_class_action">
+            <field name="name">Class</field>
+            <field name="res_model">class.data</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="school_menu" name="School Management"/>
+        <menuitem id="school_class_menu" name="Class" parent="school_menu"
+                  action="school_class_action"/>
+    </data>
+</odoo>
+

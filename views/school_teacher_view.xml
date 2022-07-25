@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="teacher_search" model="ir.ui.view">
+            <field name="name">teacher.data.search</field>
+            <field name="model">teacher.data</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="sub"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Subject" name="sub" context="{'group_by': 'sub'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record id="view_teacher_tree" model="ir.ui.view">
+            <field name="name">teacher.data.tree</field>
+            <field name="model">teacher.data</field>
+            <field name="arch" type="xml">
+                <tree string="Teachers">
+                    <field name="name"/>
+                    <field name="class_ids"/>
+                    <field name="age"/>
+                    <field name="sub"/>
+                    <field name="gender"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_teacher_form" model="ir.ui.view">
+            <field name="name">teacher.data.form</field>
+            <field name="model">teacher.data</field>
+            <field name="priority" eval="15"/>
+            <field name="arch" type="xml">
+                <form string="Teacher">
+                    <sheet>
+                        <h1>
+                            <field name="name" required="1" placeholder="Enter Name"/>
+                        </h1>
+                        <notebook col="6" rowspan="2">
+                            <page name="name" string="Insert Data">
+                                <group col="4" colspan="4"
+                                       name="school">
+                                    <field name="gender"/>
+                                    <field name="class_ids" widget="many2many_tags"/>
+                                    <field name="age"/>
+                                    <field name="sub"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="school_teacher_action">
+            <field name="name">Teachers</field>
+            <field name="res_model">teacher.data</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="school_teacher_menu" name="Teacher" parent="school_menu"/>
+
+        <menuitem id="teacher_menu" name="Teacher Data" parent="school_teacher_menu" action="school_teacher_action"/>
+
+    </data>
+</odoo>
+

@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="hr_attendance_action_overview" model="ir.actions.act_window">
+            <field name="name">Attendances</field>
+            <field name="res_model">time.sheet</field>
+            <field name="view_mode">tree</field>
+            <field name="context">{'create': False}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_empty_folder">
+                    No attendance records to display
+                </p>
+                <p>
+                    Your attendance records will be displayed here.
+                </p>
+            </field>
+        </record>
+
+        <record id="attendance_model_inherit" model="ir.ui.view">
+            <field name="name">hr.attendance.tree.inherit.hr_attendance</field>
+            <field name="model">hr.attendance</field>
+            <field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='check_in']" position="after">
+                    <field name="check_in_early" widget="float_time"/>
+                    <field name="check_in_late" widget="float_time"/>
+                </xpath>
+
+                <xpath expr="//field[@name='check_out']" position="after">
+                    <field name="check_out_early" widget="float_time"/>
+                    <field name="check_out_late" widget="float_time"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="shift_select_model" model="ir.ui.view">
+            <field name="name">shift.select.tree</field>
+            <field name="model">shift.select</field>
+            <field name="arch" type="xml">
+                <tree string="Shifts" edit="1" sample="1" editable="top">
+                    <field name="shift_name"/>
+                    <field name="start_shift"/>
+                    <field name="end_shift"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="employee_shift_model" model="ir.ui.view">
+            <field name="name">employee.shift.tree</field>
+            <field name="model">employee.shift</field>
+            <field name="arch" type="xml">
+                <tree string="Employee Shift" edit="1" sample="1" editable="top">
+                    <field name="employee_name"/>
+                    <field name="select_shift"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="shift_selection_action">
+            <field name="name">Select Shift</field>
+            <field name="res_model">shift.select</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="employee_shift_selection_action">
+            <field name="name">Employee Shift</field>
+            <field name="res_model">employee.shift</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+
+        <menuitem id="shift_selection_menu" name="Select Shift" parent="hr_attendance.menu_hr_attendance_root"
+                  action="shift_selection_action"/>
+
+        <menuitem id="employee_shift_selection_menu" name="Employee Shift" parent="hr_attendance.menu_hr_attendance_root"
+                  action="employee_shift_selection_action"/>
+
+        <menuitem id="menu_hr_attendance_attendances_overview" name="Attendances" parent="school_menu"
+                  sequence="1" groups="hr_attendance.group_hr_attendance" action="hr_attendance_action_overview"/>
+
+    </data>
+</odoo>

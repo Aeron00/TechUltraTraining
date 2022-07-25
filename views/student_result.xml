@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <record id="student_data_inherited" model="ir.ui.view">
+            <field name="name">student.data.form.inherit.student</field>
+            <field name="model">student.data</field>
+            <field name="inherit_id" ref="view_student_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[3]/group[@name='student_data_result']" position="inside">
+                    <field name="maths" readonly="True"/>
+                    <field name="science" readonly="True"/>
+                    <field name="english" readonly="True"/>
+                    <field name="history" readonly="True"/>
+                    <field name="percentage" readonly="True"/>
+                    <field name="teacher" readonly="True"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="sale_order_view_inherit" model="ir.ui.view">
+            <field name="name">sale.order.form.inherit.sale</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="total"/>
+                    <field name="tax"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

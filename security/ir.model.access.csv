@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+school_management_student_data,student.data,model_student_data,,1,1,1,1
+school_management_teacher_data,teacher.data,model_teacher_data,,1,1,1,1
+school_management_class_data_student,class.data.student,model_class_data,group_student,1,0,0,0
+school_management_class_data_teacher,class.data.teacher,model_class_data,group_teacher,1,1,1,1
+school_management_teacher_result,teacher.result,model_teacher_result,,1,1,1,1
+school_management_time_sheet,time.sheet,model_time_sheet,,1,1,1,1
+school_management_employee_shift,employee.shift,model_employee_shift,,1,1,1,1
+school_management_shift_select,shift.select,model_shift_select,,1,1,1,1

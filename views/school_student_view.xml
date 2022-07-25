@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="view_student_tree" model="ir.ui.view">
+            <field name="name">student.data.tree</field>
+            <field name="model">student.data</field>
+            <field name="arch" type="xml">
+                <tree string="Student" decoration-info="gender=='male'" decoration-danger="gender=='female'"
+                      decoration-muted="gender=='other'">
+                    <field name="stud_id"/>
+                    <field name="name"/>
+                    <field name="class_id"/>
+                    <field name="age"/>
+                    <field name="gender"/>
+                    <button type="object" name="generate_id" string="Generate id" class="btn-info"/>
+                    <button type="object" name="unlink" string="Delete" class="btn-danger"
+                            confirm="Are you sure you want to delete this record?"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_student_form" model="ir.ui.view">
+            <field name="name">student.data.form</field>
+            <field name="model">student.data</field>
+            <field name="arch" type="xml">
+                <form string="Student">
+                    <sheet>
+                        <h1>
+                            <field name="name" required="1" placeholder="Name"/>
+                        </h1>
+                        <notebook colspan="4">
+                            <page name="name" string="Information">
+                                <group col="6" colspan="1"
+                                       name="school">
+                                    <field name="gender"/>
+                                    <field name="age"/>
+                                    <field name="class_id"/>
+                                </group>
+                            </page>
+                            <page string="Attendance">
+                                <group>
+                                    <button type="object" name="student_check_in" string="Check in"
+                                            class="btn-primary"/>
+                                    <button type="object" name="student_check_out" string="Check out" class="btn-info"/>
+                                    <field name="total_hours" widget="float_time"/>
+                                </group>
+                            </page>
+                            <page string="Results">
+                                <group name="student_data_result">
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="school_student_action">
+            <field name="name">Students</field>
+            <field name="res_model">student.data</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem id="school_student_menu" name="Student" parent="school_menu"
+                  action="school_student_action"/>
+
+
+    </data>
+</odoo>
+
